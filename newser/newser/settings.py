@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for newser project.
 
@@ -9,6 +10,8 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
+
+
 
 import os
 
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_URL = "/accounts/login"
+LOGIN_REDIRECT_URL = '/accounts'
+SOCIAL_AUTH_TWITTER_KEY = 'Your Twitter Key'
+SOCIAL_AUTH_TWITTER_SECRET = 'Your Twitter Secret'
