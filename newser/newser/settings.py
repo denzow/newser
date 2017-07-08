@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 
-from .secret import TWITTER_KEY, TWITTER_SECRET
+from .secret import TWITTER_KEY, TWITTER_SECRET, DJANGO_SECRET_KEY
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b5$)(efbkz5rftj)(+ca%0xyqyl$j!#(4jsrekz0&a__ynb6ca'
+SECRET_KEY = DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
