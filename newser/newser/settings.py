@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 
-
+from .secret import TWITTER_KEY, TWITTER_SECRET
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -67,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -125,8 +127,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 LOGIN_URL = "/accounts/login"
 LOGIN_REDIRECT_URL = '/accounts'
-SOCIAL_AUTH_TWITTER_KEY = 'Your Twitter Key'
-SOCIAL_AUTH_TWITTER_SECRET = 'Your Twitter Secret'
+SOCIAL_AUTH_TWITTER_KEY = TWITTER_KEY
+SOCIAL_AUTH_TWITTER_SECRET = TWITTER_SECRET
