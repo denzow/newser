@@ -7,5 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    print(dir(request.user))
-    return HttpResponse("Hello, world. You're at the polls index. you are {}".format(request.user.username))
+    context = {
+        "user": request.user
+    }
+    return render(request, "accounts/profile.html", context=context)
