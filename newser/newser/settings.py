@@ -12,7 +12,13 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 
-from .secret import TWITTER_KEY, TWITTER_SECRET, DJANGO_SECRET_KEY
+from .secret import (
+    DJANGO_SECRET_KEY,
+    TWITTER_KEY,
+    TWITTER_SECRET,
+    FACEBOOK_ID,
+    FACEBOOK_SECRET
+)
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +34,7 @@ SECRET_KEY = DJANGO_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["myapp.com"]
 
 
 # Application definition
@@ -111,9 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'ja'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -130,10 +135,19 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
 LOGIN_URL = "/accounts/login"
 LOGIN_REDIRECT_URL = '/accounts'
+# twitter
 SOCIAL_AUTH_TWITTER_KEY = TWITTER_KEY
 SOCIAL_AUTH_TWITTER_SECRET = TWITTER_SECRET
+
+# Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_ID
+SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+#SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.9'

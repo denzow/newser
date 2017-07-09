@@ -3,15 +3,16 @@
 {% block content %}
 
 {% if form.errors  %}
-  <div class="alert alert-danger" role="alert">
-    <p>Your usernamne and password didn't match. Please try again.</p>
-  </div>
+    <div class="alert alert-danger" role="alert">
+        <p>Your usernamne and password didn't match. Please try again.</p>
+    </div>
 {% endif %}
 
 <div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title text-center">Log-in to mysite</h3>
-  </div>
-  <a href="{% url 'social:begin' 'twitter' %}?next={{ next}}">Login with Twitter</a>
+    <div class="panel-heading">
+        <h3 class="panel-title text-center">Log-in to mysite</h3>
+    </div>
+    <a href="{% url 'social:begin' 'twitter' %}?next={{ next}}">Login with Twitter</a> <br/>
+    <a href="{% url 'social:begin' 'facebook' %}?next={{ next}}">Login with Facebook</a>
 </div>
 {% endblock %}
