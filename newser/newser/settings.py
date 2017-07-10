@@ -34,12 +34,13 @@ SECRET_KEY = DJANGO_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["myapp.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "viewer.apps.ViewerConfig",
     "accounts.apps.AccountsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -66,7 +67,9 @@ ROOT_URLCONF = 'newser.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + os.sep + "templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,4 +153,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_ID
 SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email, age_range'
+}
 #SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.9'
