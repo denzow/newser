@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "viewer.apps.ViewerConfig",
     "accounts.apps.AccountsConfig",
+    "backend.apps.BackendConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'social.apps.django_app.default', # こちらだとmigrateでテーブルが引っかからなかった
     "social_django",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
