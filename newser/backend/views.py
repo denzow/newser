@@ -11,6 +11,7 @@ def test(request):
     context = {
         "user": "DEMO"
     }
+    FeedsCrawler().run()
     return render(request, "accounts/profile.html", context=context)
 
 

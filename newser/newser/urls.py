@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from backend.urls import router as backend_router
+from backend.urls import urlpatterns
 
 urlpatterns = [
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^viewer/', include('viewer.urls', namespace='viewer')),
-    url(r'^backend/', include(backend_router.urls, namespace='backend')),
+    url(r'^backend/', include(urlpatterns, namespace='backend')),
     url(r'^admin/', admin.site.urls),
     url('', include('social.apps.django_app.urls', namespace='social')),
 ]

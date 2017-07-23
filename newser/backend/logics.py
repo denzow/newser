@@ -17,8 +17,11 @@ class FeedsCrawler(object):
         :return:
         """
         for feed in self.feed_list:
-            feed_result = feedparser.parse(feed.url)
+            print(feed.get_max_timestamp())
+            feed_result = feedparser.parse(feed.url, modified=feed.get_max_timestamp())
+            #feed_result = feedparser.parse(feed.url)
             for entry in feed_result.entries:
+                print(entry.title)
                 update_time_str = entry.updated
                 new_article = Articles()
                 new_article.url = entry.link
