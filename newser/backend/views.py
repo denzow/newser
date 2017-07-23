@@ -3,11 +3,11 @@ import django_filters
 from rest_framework import viewsets, filters
 from .models import Articles
 from .serializer import ArticleSerializer
-
+from .logics import FeedsCrawler
 # Create your views here.
 
 
-def index(request):
+def test(request):
     context = {
         "user": "DEMO"
     }
@@ -19,9 +19,10 @@ class ArticleViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         # ログイン済みでなければ全件戻す
+        #FeedsCrawler().run()
         if self.request.user.id:
             # TODO
-            return Articles.objects.all()
+            return Articles.objects.all().order_by("-timestamp")
         else:
-            return Articles.objects.all()
+            return Articles.objects.all().order_by("-timestamp")
 
