@@ -1,0 +1,22 @@
+<news-card>
+
+    <div class="mdl-grid portfolio-max-width">
+        <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card" each="{ newsData in newsDataList }">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">{newsData.title}</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+               {newsData.summary}
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="{newsData.url}">Read more</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var tag = this;
+        tag.newsDataList = opts.newsDataList;
+        console.log(JSON.stringify(tag.newsDataList , null, 4));
+    </script>
+
+</news-card>

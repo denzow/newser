@@ -14,7 +14,14 @@ def index(request):
     return render(request, "accounts/profile.html", context=context)
 
 
-class ArticleViewSet(viewsets.ModelViewSet):
-    queryset = Articles.objects.all()
+class ArticleViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        # ログイン済みでなければ全件戻す
+        if self.request.user.id:
+            # TODO
+            return Articles.objects.all()
+        else:
+            return Articles.objects.all()
 

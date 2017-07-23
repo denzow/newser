@@ -13,3 +13,4 @@ def index(request):
         "user": request.user
     }
     return render(request, "viewer/contents/list.html", context=context)
+

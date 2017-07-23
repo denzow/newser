@@ -52,7 +52,12 @@ INSTALLED_APPS = [
     #'social.apps.django_app.default', # こちらだとmigrateでテーブルが引っかからなかった
     "social_django",
     "rest_framework",
+    'django_filters',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
