@@ -14,6 +14,7 @@ class RssFeeds(models.Model):
     def get_max_timestamp(self):
         return self.related_articles.aggregate(models.Max('timestamp'))["timestamp__max"]
 
+
 class Articles(models.Model):
 
     url = models.URLField(max_length=2000, primary_key=True)

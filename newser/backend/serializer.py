@@ -8,5 +8,5 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Articles
-        fields = ('title', 'url', "summary", "timestamp", "source_name")
+        fields = ('title', 'url', "summary", "timestamp", "source_name", "thumbnail")
 
