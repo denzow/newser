@@ -7,9 +7,18 @@ class RssFeeds(models.Model):
 
     url = models.URLField(max_length=2000)
     name = models.CharField(max_length=1000)
+    valid = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "{}:{}".format(self.name, self.valid)
+
+    @classmethod
+    def get_valid_feeds(cls):
+        """
+        フィードの一覧について有効になっているものだけ戻す
+        :return:
+        """
+        return cls.objects.filter(valid=True)
 
     def get_max_timestamp(self):
         return self.related_articles.aggregate(models.Max('timestamp'))["timestamp__max"]
