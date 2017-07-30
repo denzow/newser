@@ -12,22 +12,50 @@ NEWS LIST
 
 {% endblock %}
 {% block content %}
-        <main class="mdl-layout__content">
-                <news-card></news-card>
-        </main>
-
+    <main class="mdl-layout__content">
+        <news-card></news-card>
+    </main>
 <script>
 
-axios.get('/backend/article.json')
-    .then(function (response) {
-        console.log(JSON.stringify(response, null, 4));
-        var articleList = response.data;
-        riot.mount("news-card", {
-            newsDataList: articleList
+var NEWS_CARD = null;
+var NEXT_API_URL = null;
+var IS_LOADING = false;
+riot.compile(function() {
+    // initialize
+    axios.get('/backend/article.json')
+        .then(function (response) {
+            //console.log(JSON.stringify(response, null, 4));
+            var articleList = response.data.results;
+            NEWS_CARD=riot.mount("news-card", {
+                newsDataList: articleList,
+                next : response.data.next
+            })[0];
+            NEXT_API_URL = response.data.next;
+            console.log(NEWS_CARD);
+        }).catch(function (error) {
+            console.log(error);
         });
-    }).catch(function (error) {
-        console.log(error);
-    });
+})
+
+var content = document.querySelector(".mdl-layout__content");
+content.addEventListener("scroll", function(e){
+    console.log(content.scrollTop, content.scrollHeight);
+    if(!IS_LOADING && content.scrollTop >  content.scrollHeight * 0.7 && NEXT_API_URL){
+        // 乱発防止用のフラグ
+        IS_LOADING = true;
+        console.log("load", NEXT_API_URL);
+        axios.get(NEXT_API_URL)
+            .then(function (response) {
+            //console.log(JSON.stringify(response, null, 4));
+            var articleList = response.data.results;
+            NEWS_CARD.addArticle(articleList);
+            NEXT_API_URL = response.data.next;
+            IS_LOADING = false;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+}, false);
 
 
 </script>

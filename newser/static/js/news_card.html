@@ -1,6 +1,7 @@
-<news-card>
+<news-card >
 
-    <div class="mdl-grid portfolio-max-width">
+    <div class="mdl-grid portfolio-max-width" ref="news_base" onscroll="{scrollWatch}">
+        <!-- card -->
         <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card" each="{ newsData in newsDataList }">
             <div class="mdl-card__media">
                 <img class="article-image" src="{newsData.thumbnail}" border="0" alt="" />
@@ -15,21 +16,37 @@
             <div class="mdl-card__actions mdl-card--border">
                 <a target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="{newsData.url}">
                     Read more
-
                 </a>
             </div>
         </div>
+
+        <!-- footer -->
+        <div></div>
     </div>
     <script>
         var tag = this;
         tag.newsDataList = opts.newsDataList;
+        tag.next = opts.next;
         console.log(JSON.stringify(tag.newsDataList , null, 4));
+
+        tag.scrollWatch = (e) =>{
+            e.preventUpdate = true;
+            console.log(tag.refs);
+            //console.log(newsBase.scrollTop, newsBase.scrollHeight);
+        }
 
         // HTMLのエスケープ
         tag.safeHtmlEscape = (html_src)=>{
             var tmpNode = document.createElement("span");
             tmpNode.innerHTML= html_src;
             return tmpNode.textContent;
+        }
+        // 記事追加用のAPI
+        tag.addArticle = (articleList)=>{
+            console.log(articleList);
+            tag.newsDataList = tag.newsDataList.concat(articleList);
+            console.log(tag.newsDataList);
+            tag.update();
         }
     </script>
 
